@@ -1,0 +1,43 @@
+<div class="container">
+<% if !flash[:notice].blank? %>
+   <div>
+        <%= flash[:notice] %>
+   </div>
+<% end %>
+
+<br>
+<% url_list = "" %>
+<% url_list = url_list + flash[:notice].to_s  %> 
+<%= url_list %> 
+    
+
+<%= link_to "New Resume", new_resume_path %>
+<br>
+<br>
+
+<table border="3">
+   <thead>
+      <tr>
+         <th>Candidate Name</th>
+         <th>Download Link</th>
+         <th>Action</th>
+      </tr>
+   </thead>
+   
+    <%= @glob_var %>
+   <tbody>
+       <% i = 0 %>
+      <% @resumes.each do |resume| %>
+       <% i = i + 1 %> 
+         <tr>
+            <td><%= resume.name %> </td>
+            <td><%= link_to "Download", resume.attachment_url %></td>
+            <td><%= link_to "Delete",  resume, method: :delete, confirm: "Are you sure you want to delete #{resume.name}?" %></td>
+             <td> <%= i %> </td>
+         </tr>
+         
+      <% end %>
+   </tbody>
+   
+</table>
+</div>
